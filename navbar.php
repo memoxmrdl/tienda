@@ -6,15 +6,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="index.php">Abarrotes interactive</a>
+          <a class="brand" href="index.php">Tienda interactiva</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               <a href="login.php">Iniciar sesion</a>
             </p>
             <ul class="nav">
-              <li class="active"><a href="index.php">Inicio</a></li>
-              <li><a href="servicios.php">Servicios</a></li>
-              <li><a href="contacto.php">Contacto</a></li>
+              <li class="active"><a href="#">Inicio</a></li>
+              <li><a href="#">Servicios</a></li>
+              <li><a href="#">Contacto</a></li>
             </ul>
           </div>
         </div>

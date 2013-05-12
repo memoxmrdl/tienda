@@ -23,14 +23,27 @@ require "../controller/mysql.php";
 
 <div class="container">
   <div class="span4">
-  <h3 align="left">Nuevo producto</h3>
+  <h3 align="left">Editar producto</h3>
    <?php 
       notice();
+
+      $ms = new mysql();
+
+      $id = $_GET["id"];
+
+
+      $SQL = "SELECT A.producto_id, A.nombre, A.precio, A.almacen, A.url, B.nombre AS tipo ";
+      $SQL .= "FROM productos A ";
+      $SQL .= "INNER JOIN productos_tipos_cantidades B ";
+      $SQL .= "ON A.tipo_cantidades_id = B.tipo_cantidades_id ";
+      $SQL .= "WHERE A.producto_id = ".$id."";
+
+      $row = $ms->query($SQL);
    ?>
   <form action="../controller/registrar_producto.php" method="post">
-    <input type="text" name="nombre" id="password" placeholder="Nombre" class="input-xlarge" required>
-    <textarea rows="7" style="width:270px" name="descripcion" placeholder="Descripcion"></textarea>
-    <input type="text" name="almacen" id="almacen" placeholder="No de articulos" class="span3" required>
+    <input type="text" name="nombre" placeholder="Nombre" class="input-xlarge" value="<? echo $row[0]['nombre'] ?>" required>
+    <textarea rows="7" style="width:270px" name="descripcion" placeholder="Descripcion"><? echo $row[0]['nombre'] ?></textarea>
+    <input type="text" name="almacen" placeholder="No de articulos" class="span3" value="<? echo $row[0]['almacen'] ?>" required>
     <select name="tipo_cantidades_id">
     <?
       $ms = new mysql();
