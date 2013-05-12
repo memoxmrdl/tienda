@@ -1,4 +1,7 @@
-<?php require "../controller/utilities.php" ?>
+<?php 
+require "../controller/utilities.php"; 
+require "../controller/mysql.php";
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -19,32 +22,42 @@
 <?php require "../navbar.php"; ?>
 
 <div class="container">
-  <div class="span3">
-        <h3 align="left">Nuevo producto</h3>
-         <?php 
-            notice();
-         ?>
-        <form action="../controller/registrar_producto.php" method="post">
-          <input type="text" name="nombre" id="password" placeholder="Nombre" class="input-xlarge" required>
-          <textarea rows="7" style="width:270px" name="description" placeholder="Descripcion"></textarea>
-          <div class="input-append">
-            <input class="span2" id="url" name="url" type="text">
-            <button class="btn" type="button">image</button>
-          </div>
-          <div class="input-prepend input-append">
-            <span class="add-on">$</span>
-            <input class="span2" id="precio" name="precio" type="text">
-          </div>
-          <input type="text" name="almacen" id="almacen" placeholder="No de articulos" class="input-medium" required>
-          <button type="submit" id="submit_registro" class="btn btn-primary">Registrar</button>
-        </form>
+  <div class="span4">
+  <h3 align="left">Nuevo producto</h3>
+   <?php 
+      notice();
+   ?>
+  <form action="../controller/registrar_producto.php" method="post">
+    <input type="text" name="nombre" id="password" placeholder="Nombre" class="input-xlarge" required>
+    <textarea rows="7" style="width:270px" name="descripcion" placeholder="Descripcion"></textarea>
+    <input type="text" name="almacen" id="almacen" placeholder="No de articulos" class="span3" required>
+    <select name="tipo_cantidades_id">
+    <?
+      $ms = new mysql();
+      $row = $ms->query("SELECT * FROM productos_tipos_cantidades");
+
+      foreach($row as $i => $v) {
+        echo "<option value=\"".$row[$i]['tipo_cantidades_id']."\">".$row[$i]['nombre']."</option>";
+      }
+    ?>
+    </select>
+    <div class="input-prepend input-append">
+      <span class="add-on">$</span>
+      <input class="span2" id="precio" name="precio" type="text">
+    </div>
+    <div class="input-append">
+      <input class="span3" id="url" name="url" type="text">
+      <button class="btn" type="button">image</button>
+    </div>
+    <button type="submit" id="submit_registro" class="btn btn-primary">Registrar</button>
+  </form>
   </div>
-  <div class="span8">
-    <h3>Productos</h3>
+  <div class="span7">
+    <h3>Listado de productos</h3>
     <table class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
+        <th></th>
         <th>Nombre</th>
         <th>Precio</th>
         <th>Almacen</th>
@@ -53,23 +66,27 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <?php 
-        $ms = new mysql();
-        $row = $ms->query("SELECT * FROM productos");
+    <?php 
+      $ms = new mysql();
+      
+      $SQL = "SELECT A.nombre, A.precio, A.almacen, A.url, B.nombre AS tipo ";
+      $SQL .= "FROM productos A ";
+      $SQL .= "INNER JOIN productos_tipos_cantidades B ";
+      $SQL .= "ON A.tipo_cantidades_id = B.tipo_cantidades_id";
 
-        foreach ($row as $i => $v) {
-          echo "<td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td><a href=\"#\" class=\"btn btn-info\">Editar</a></td>
-              <td><a href=\"#\" class=\"btn btn-danger\">Editar</a></td>";
-        }
-
-
-        ?>
-      </tr>
+      $row = $ms->query($SQL);
+    
+      foreach ($row as $i => $v) {
+        $img = empty($row[$i]['url']) ? "../assets/no_product_img.jpg" : $row[$i]['url'];
+        echo "<tr>
+            <td><img src=\"".$img."\" width=\"128\" height=\"128\"></td>
+            <td>".$row[$i]['nombre']."</td>
+            <td>$".$row[$i]['precio']."</td>
+            <td>".$row[$i]['almacen']." ".$row[$i]['tipo']."</td>
+            <td><a href=\"#\" class=\"btn btn-info\">Editar</a></td>
+            <td><a href=\"#\" class=\"btn btn-danger\">Editar</a></td></tr>";
+      }
+    ?>
     </tbody>
     </table>
   </div>
