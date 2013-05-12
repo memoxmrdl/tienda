@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.0
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-05-2013 a las 21:00:09
--- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.3.13
+-- Tiempo de generación: 11-05-2013 a las 21:43:31
+-- Versión del servidor: 5.5.31-0ubuntu0.12.04.1
+-- Versión de PHP: 5.3.10-1ubuntu3.6
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -28,13 +28,46 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `productos` (
   `producto_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) DEFAULT NULL,
+  `tipo_cantidades_id` bigint(20) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `descripcion` text NOT NULL,
-  `precio` double DEFAULT NULL,
+  `precio` double NOT NULL,
   `url` text NOT NULL,
-  `almacen` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`producto_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `almacen` double NOT NULL,
+  PRIMARY KEY (`producto_id`),
+  KEY `tipo_cantidades_id` (`tipo_cantidades_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`producto_id`, `tipo_cantidades_id`, `nombre`, `descripcion`, `precio`, `url`, `almacen`) VALUES
+(6, 1, 'Queso asadero la villita', 'Queso asadero', 34, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 4),
+(7, 1, 'Crema lala 250gr', 'Crema lala', 10, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 100),
+(8, 3, 'Tortillinas Tia Rosa 12pz', 'Tortillas', 12, '', 100),
+(9, 3, 'Zucaritas', 'aljsdnajsndjlasndlaasd a asd a sda sd asdasdads asdasdasd asdasdads asdasdasd asdads', 49, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos_tipos_cantidades`
+--
+
+CREATE TABLE IF NOT EXISTS `productos_tipos_cantidades` (
+  `tipo_cantidades_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`tipo_cantidades_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `productos_tipos_cantidades`
+--
+
+INSERT INTO `productos_tipos_cantidades` (`tipo_cantidades_id`, `nombre`) VALUES
+(1, 'Piezas'),
+(2, 'Kilos'),
+(3, 'Paquetes');
 
 -- --------------------------------------------------------
 
@@ -107,6 +140,12 @@ CREATE TABLE IF NOT EXISTS `ventas_productos` (
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`tipo_cantidades_id`) REFERENCES `productos_tipos_cantidades` (`tipo_cantidades_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `ventas`
