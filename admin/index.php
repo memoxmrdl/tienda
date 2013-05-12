@@ -76,8 +76,8 @@ require "../controller/mysql.php";
 
       $row = $ms->query($SQL);
     
-      foreach ($row as $key) {
-        $img = empty($row[$key]['url']) ? "../assets/no_product_img.jpg" : $row[$key]['url'];
+      foreach ($row as $key => $value) {
+        $img = empty($row[$key]['url']) ? "assets/no_product_img.jpg" : $row[$key]['url'];
         echo "<tr>
             <td><img src=\"".$img."\" width=\"128\" height=\"128\"></td>
             <td>".$row[$key]['nombre']."</td>

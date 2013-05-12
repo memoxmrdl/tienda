@@ -22,31 +22,51 @@ require "controller/mysql.php";
 <?php require "navbar.php"; ?>
 
 <div class="container">
-  <div class="span2">
+  <div class="span3">
     sdfsd
   </div>
-  <div class="span9">
-    <ul class="thumbnails media-grid">
-        <?php
-        $ms = new mysql();
-        $row = $ms->query("SELECT * FROM productos ff");
+  <div class="span8">
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php 
+      $ms = new mysql();
+      
+      $SQL = "SELECT A.nombre, A.precio, A.descripcion, A.url, B.nombre AS tipo ";
+      $SQL .= "FROM productos A ";
+      $SQL .= "INNER JOIN productos_tipos_cantidades B ";
+      $SQL .= "ON A.tipo_cantidades_id = B.tipo_cantidades_id";
 
-        foreach ($row as $key => $value) {
-          $img = empty($row[$key]['url']) ? "assets/no_product_img.jpg" : $row[$key]['url'];
-        ?>
-        <li class="span3">
-        <div class="thumbnail">
-          <img src="<? echo $img ?>" width="128" height="128" class="thumbnail">
-            <div class="caption">
-            <h3><? echo $row[$key]['nombre'] ?></h3>
-            <p><? echo $row[$key]['descripcion'] ?></p>
-            <p><h4 style="color: red">$<?= $row[$key]['precio'] ?> MXN</h4><p>
-            <p><a href="#" class="btn btn-primary">Agregar</a></p>
+      $row = $ms->query($SQL);
+    
+      foreach ($row as $key => $value) {
+        $img = empty($row[$key]['url']) ? "assets/no_product_img.jpg" : $row[$key]['url'];
+      ?>  
+      <tr>
+        <td style="width:120px">
+          <img src="<? echo $img ?>" width="128px" height="128px">
+        </td>
+        <td>
+          <div class="row-fluid">
+            <div class="span10"> 
+              <h4><? echo $row[$key]['nombre'] ?></h4>
+              <p><? echo $row[$key]['descripcion'] ?>
             </div>
-        </div>
-        </li>
-        <?php } ?>
-    </ul>
+            <div class="span2">
+              <h4>$<? echo $row[$key]['precio'] ?> MXN</h4>
+              <a href="#" class="btn btn-info">Agregar</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <?php } ?>
+    </tbody>
+    </table>
   </div>
 </div>
 
