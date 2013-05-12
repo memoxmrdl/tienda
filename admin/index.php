@@ -76,13 +76,13 @@ require "../controller/mysql.php";
 
       $row = $ms->query($SQL);
     
-      foreach ($row as $i => $v) {
-        $img = empty($row[$i]['url']) ? "../assets/no_product_img.jpg" : $row[$i]['url'];
+      foreach ($row as $key) {
+        $img = empty($row[$key]['url']) ? "../assets/no_product_img.jpg" : $row[$key]['url'];
         echo "<tr>
             <td><img src=\"".$img."\" width=\"128\" height=\"128\"></td>
-            <td>".$row[$i]['nombre']."</td>
-            <td>$".$row[$i]['precio']."</td>
-            <td>".$row[$i]['almacen']." ".$row[$i]['tipo']."</td>
+            <td>".$row[$key]['nombre']."</td>
+            <td>$".$row[$key]['precio']."</td>
+            <td>".$row[$key]['almacen']." ".$row[$key]['tipo']."</td>
             <td><a href=\"#\" class=\"btn btn-info\">Editar</a></td>
             <td><a href=\"#\" class=\"btn btn-danger\">Editar</a></td></tr>";
       }

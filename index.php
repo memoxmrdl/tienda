@@ -1,4 +1,4 @@
-<?php 
+<?php
 require "controller/utilities.php";
 require "controller/mysql.php";
 ?>
@@ -26,26 +26,26 @@ require "controller/mysql.php";
     sdfsd
   </div>
   <div class="span9">
-    <ul class="thumbnails media-gri">
+    <ul class="thumbnails media-grid">
         <?php
         $ms = new mysql();
-        $row = $ms->query("SELECT * FROM productos");
+        $row = $ms->query("SELECT * FROM productos ff");
 
         foreach ($row as $key => $value) {
           $img = empty($row[$key]['url']) ? "assets/no_product_img.jpg" : $row[$key]['url'];
         ?>
         <li class="span3">
         <div class="thumbnail">
-          <img src="<?= $img ?>" width="128" height="128" class="thumbnail">
+          <img src="<? echo $img ?>" width="128" height="128" class="thumbnail">
             <div class="caption">
-            <h3><?= $row[$key]['nombre'] ?></h3>
-            <p><?= $row[$key]['descripcion'] ?></p>
+            <h3><? echo $row[$key]['nombre'] ?></h3>
+            <p><? echo $row[$key]['descripcion'] ?></p>
             <p><h4 style="color: red">$<?= $row[$key]['precio'] ?> MXN</h4><p>
             <p><a href="#" class="btn btn-primary">Agregar</a></p>
             </div>
         </div>
         </li>
-        <? } ?>
+        <?php } ?>
     </ul>
   </div>
 </div>
