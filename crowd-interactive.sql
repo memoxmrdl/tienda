@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-05-2013 a las 21:43:31
+-- Tiempo de generación: 15-05-2013 a las 23:44:28
 -- Versión del servidor: 5.5.31-0ubuntu0.12.04.1
 -- Versión de PHP: 5.3.10-1ubuntu3.6
 
@@ -35,18 +35,17 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `url` text NOT NULL,
   `almacen` double NOT NULL,
   PRIMARY KEY (`producto_id`),
+  UNIQUE KEY `nombre` (`nombre`),
   KEY `tipo_cantidades_id` (`tipo_cantidades_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`producto_id`, `tipo_cantidades_id`, `nombre`, `descripcion`, `precio`, `url`, `almacen`) VALUES
-(6, 1, 'Queso asadero la villita', 'Queso asadero', 34, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 4),
-(7, 1, 'Crema lala 250gr', 'Crema lala', 10, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 100),
-(8, 3, 'Tortillinas Tia Rosa 12pz', 'Tortillas', 12, '', 100),
-(9, 3, 'Zucaritas', 'aljsdnajsndjlasndlaasd a asd a sda sd asdasdads asdasdasd asdasdads asdasdasd asdads', 49, 'http://swotti.starmedia.com/tmp/swotti/cacheA2VSBG9NCW==/imgKellogs3.jpg', 100);
+(33, 1, 'Queso Amarillo', 'lasjndas asdasd asdasdasd asdasd asdasd asdasd asdasdasd asdasdas d sadasd asdasdasd ', 120, '', 10),
+(34, 1, 'Leche', 'alsndlas dasdasd asdasdad asdasd asdads asdasdsa dasdasd asdasdasd asdasdsad asdasda sdasdas dasd', 11.5, '', 100);
 
 -- --------------------------------------------------------
 
@@ -100,14 +99,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `privilegio` varchar(1) NOT NULL,
   UNIQUE KEY `usuario` (`usuario`),
   KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `usuario`, `password`, `nombre`, `apellidos`, `email`, `privilegio`) VALUES
-(2, 'admin', 'admin', 'Administrador', '', 'admin@example.com', 'A');
+(2, 'admin', 'admin', 'Administrador', '', 'admin@example.com', 'A'),
+(3, 'memox', 'gemito', 'Jose Guillermo', 'Moreno Dolores', 'jmemox@gmail.com', 'U');
 
 -- --------------------------------------------------------
 
@@ -157,8 +157,8 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `ventas_productos`
 --
 ALTER TABLE `ventas_productos`
-  ADD CONSTRAINT `ventas_productos_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`producto_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ventas_productos_ibfk_1` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`venta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ventas_productos_ibfk_1` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`venta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `ventas_productos_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`producto_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
