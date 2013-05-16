@@ -1,6 +1,7 @@
 <?php 
 require "../controller/utilities.php"; 
 require "../controller/mysql.php";
+include "../controller/status_session.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -84,7 +85,7 @@ require "../controller/mysql.php";
             <td>$".$row[$key]['precio']."</td>
             <td>".$row[$key]['almacen']." ".$row[$key]['tipo']."</td>
             <td><a href=\"modificar.php?id=".$row[$key]['producto_id']."\" class=\"btn btn-info\">Editar</a></td>
-            <td><a href=\"eliminar.php?id=".$row[$key]['producto_id']."\" class=\"btn btn-danger\">Editar</a></td></tr>";
+            <td><a href=\"eliminar.php?id=".$row[$key]['producto_id']."\" onclick=\"return confirm('¿Desea elminar este producto?')\" class=\"btn btn-danger\">Editar</a></td></tr>";
       }
     ?>
     </tbody>

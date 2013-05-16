@@ -23,7 +23,9 @@ require "controller/mysql.php";
 
 <div class="container">
   <div class="span3">
-    sdfsd
+    <img src="assets/cart.png" width="128" height="128">
+    <?php $cart = new Cart(); ?>
+    <h3>Mi canasta(<?= $cart->size(); ?>)</h3>
   </div>
   <div class="span8">
     <table class="table table-hover">

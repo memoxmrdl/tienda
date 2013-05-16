@@ -3,7 +3,7 @@
 class mysql {
 
     private $conn;
-    private $error;
+    public $error;
     private $msgerror;
     private $rows;
     private $host = "localhost"; // Nombre del servidor
@@ -80,7 +80,7 @@ class mysql {
         return $type;
     }
 
-    public function BeginTransaction() {
+    public function Begin() {
         @mysql_query("START TRANSACTION;", $this->conn);
     }
 
@@ -106,12 +106,8 @@ class mysql {
         return $this->msgerror;
     }
 
-    public function error() {
-        if($this->error) {
-            return false;
-        } else {
-            return true;
-        }
+    public function details_error() {
+        return $this->error;
     }
 
 }

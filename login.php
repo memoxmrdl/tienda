@@ -17,49 +17,43 @@
 
 <body>
 <?php require "navbar.php"; ?>
-
 <div class="container">
+<div class="span4">
+  <h3 align="left">Iniciar sesion</h3>
+   <?php 
+      notice();
+   ?>
+  <form action="controller/login.php" method="post">
+    <input class="input-medium" name="usuario" id="usuario" type="text" placeholder="Usuario" required>
+    <input type="password" name="password" id="password" placeholder="Contraseña" class="input-medium" required>
+    <div align="left">
+      <button type="submit" id="submit_registro" class="btn btn-primary">Iniciar</button>
+    </div>
+  </form>
 
-      <div class="span4">
-        <h3 align="left">Iniciar sesion</h3>
-         <?php 
-            notice();
-         ?>
-        <form action="controller/login.php" method="post">
-          <div class="input-prepend">
-            <div align="left"><span class="add-on">@</span>
-              <input class="span2" name="usuario" id="usuario" type="text" placeholder="Usuario" required>
-            </div>
-          </div>
-          <input type="password" name="password" id="password" placeholder="Contraseña" class="input-medium" required>
-          <div align="left">
-            <button type="submit" id="submit_registro" class="btn btn-primary btn-block">Iniciar</button>
-          </div>
-        </form>
-
-        <h3 align="left">Regístrate para comprar</h3>
-         <?php 
-            notice();
-         ?>
-        <form action="controller/registrar_usuario.php" method="post">
-          <div class="input-prepend">
-            <div align="left"><span class="add-on">@</span>
-              <input class="3" name="usuario" id="usuario" type="text" placeholder="Usuario" required>
-            </div>
-          </div>
-          <input type="password" name="password" id="password" placeholder="Contraseña" class="input-xlarge" required>
-          <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="input-xlarge" required>
-          <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" class="input-xlarge" required>
-          <div align="left">
-            <input type="text" name="email" id="email" placeholder="Correo electronico" class="input-xlarge" required>
-            <button type="submit" id="submit_registro" class="btn btn-primary btn-block">Registrarme</button>
-          </div>
-        </form>
+  <h3 align="left">Regístrate para comprar</h3>
+   <?php 
+      notice();
+   ?>
+  <form action="controller/registrar_usuario.php" method="post">
+    <div class="input-prepend">
+      <div align="left"><span class="add-on">@</span>
+        <input class="3" name="usuario" id="usuario" type="text" placeholder="Usuario" required>
       </div>
+    </div>
+    <input type="password" name="password" id="password" placeholder="Contraseña" class="input-xlarge" required>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="input-xlarge" required>
+    <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" class="input-xlarge" required>
+    <div align="left">
+      <input type="text" name="email" id="email" placeholder="Correo electronico" class="input-xlarge" required>
+      <button type="submit" id="submit_registro" class="btn btn-primary">Registrarme</button>
+    </div>
+  </form>
+</div>
 
-      <div class="span7">
-        <img src="abarrotes.jpg"width="567" height="509" align="right">
-      </div>
+<div class="span7">
+  <img src="abarrotes.jpg"width="567" height="509" align="right">
+</div>
 
 </div>
 

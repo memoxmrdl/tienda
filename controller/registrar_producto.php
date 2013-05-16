@@ -11,9 +11,10 @@ $SQL = "INSERT INTO productos (producto_id,tipo_cantidades_id,nombre,descripcion
 $SQL .= "(null, ".$rq["tipo_cantidades_id"].",'".$rq["nombre"]."', '".$rq["descripcion"]."', ";
 $SQL .= "".$rq["precio"].", '".$rq["url"]."', '".$rq["almacen"]."')";
 
+$ms->Begin();
 $ms->query($SQL);
 
-if($ms->error()) {
+if(!$ms->error) {
     set_notice("Ya existe un producto o hubo problemas al registrar", 2);
     $ms->Rollback();
 } else {
