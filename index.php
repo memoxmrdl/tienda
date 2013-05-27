@@ -1,6 +1,5 @@
 <?php
 require "controller/utilities.php";
-require "controller/mysql.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
@@ -23,9 +22,12 @@ require "controller/mysql.php";
 
 <div class="container">
   <div class="span3">
-    <img src="assets/cart.png" width="128" height="128">
-    <?php $cart = new Cart(); ?>
-    <h3>Mi canasta(<?= $cart->size(); ?>)</h3>
+    <?php notice(); ?>
+    <!-- <img src="assets/cart.png" width="128" height="128"> -->
+    <?php $cart = new cart(); ?>
+    <h3><a href="estatus.php">Mi canasta(<?= $cart->size($_SESSION['cart']); ?>)</a></h3>
+    <p></p>
+    <?php $cart->cart_show($_SESSION['cart']); ?>
   </div>
   <div class="span8">
     <table class="table table-hover">
@@ -39,7 +41,7 @@ require "controller/mysql.php";
     <?php 
       $ms = new mysql();
       
-      $SQL = "SELECT A.nombre, A.precio, A.descripcion, A.url, B.nombre AS tipo ";
+      $SQL = "SELECT A.producto_id, A.nombre, A.precio, A.descripcion, A.url, B.nombre AS tipo ";
       $SQL .= "FROM productos A ";
       $SQL .= "INNER JOIN productos_tipos_cantidades B ";
       $SQL .= "ON A.tipo_cantidades_id = B.tipo_cantidades_id";
@@ -61,7 +63,7 @@ require "controller/mysql.php";
             </div>
             <div class="span2">
               <h4>$<? echo $row[$key]['precio'] ?> MXN</h4>
-              <a href="#" class="btn btn-info">Agregar</a>
+              <a href="controller/additemtocart.php?producto_id=<?php echo $row[$key]['producto_id']; ?>" class="btn btn-info">Agregar</a>
             </div>
           </div>
         </td>
