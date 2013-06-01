@@ -2,10 +2,10 @@
 -- version 4.0.0
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 15-05-2013 a las 23:44:28
--- Versión del servidor: 5.5.31-0ubuntu0.12.04.1
--- Versión de PHP: 5.3.10-1ubuntu3.6
+-- Host: localhost
+-- Generation Time: Jun 01, 2013 at 05:52 PM
+-- Server version: 5.5.31-0ubuntu0.12.04.1
+-- PHP Version: 5.3.10-1ubuntu3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `crowd-interactive`
+-- Database: `crowd-interactive`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE IF NOT EXISTS `productos` (
@@ -37,20 +37,19 @@ CREATE TABLE IF NOT EXISTS `productos` (
   PRIMARY KEY (`producto_id`),
   UNIQUE KEY `nombre` (`nombre`),
   KEY `tipo_cantidades_id` (`tipo_cantidades_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`producto_id`, `tipo_cantidades_id`, `nombre`, `descripcion`, `precio`, `url`, `almacen`) VALUES
-(33, 1, 'Queso Amarillo', 'lasjndas asdasd asdasdasd asdasd asdasd asdasd asdasdasd asdasdas d sadasd asdasdasd ', 120, '', 10),
-(34, 1, 'Leche', 'alsndlas dasdasd asdasdad asdasd asdads asdasdsa dasdasd asdasdasd asdasdsad asdasda sdasdas dasd', 11.5, '', 100);
+(33, 1, 'Queso me agarres', 'Queso me agarres', 120, 'http://3.bp.blogspot.com/-wjILSbaPWrA/TpQOnZJ7M3I/AAAAAAAABzg/V13MYjkb3AU/s1600/crema+pura+de+vaca+acidificada+lala.jpg', 10);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos_tipos_cantidades`
+-- Table structure for table `productos_tipos_cantidades`
 --
 
 CREATE TABLE IF NOT EXISTS `productos_tipos_cantidades` (
@@ -60,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `productos_tipos_cantidades` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `productos_tipos_cantidades`
+-- Dumping data for table `productos_tipos_cantidades`
 --
 
 INSERT INTO `productos_tipos_cantidades` (`tipo_cantidades_id`, `nombre`) VALUES
@@ -71,7 +70,7 @@ INSERT INTO `productos_tipos_cantidades` (`tipo_cantidades_id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedores`
+-- Table structure for table `proveedores`
 --
 
 CREATE TABLE IF NOT EXISTS `proveedores` (
@@ -86,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `proveedores` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -99,20 +98,21 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `privilegio` varchar(1) NOT NULL,
   UNIQUE KEY `usuario` (`usuario`),
   KEY `usuario_id` (`usuario_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `usuario`, `password`, `nombre`, `apellidos`, `email`, `privilegio`) VALUES
 (2, 'admin', 'admin', 'Administrador', '', 'admin@example.com', 'A'),
+(5, 'mario', 'mario', 'Mario', 'Moreno Dolores', 'mario@gmail.com', 'U'),
 (3, 'memox', 'gemito', 'Jose Guillermo', 'Moreno Dolores', 'jmemox@gmail.com', 'U');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ventas`
+-- Table structure for table `ventas`
 --
 
 CREATE TABLE IF NOT EXISTS `ventas` (
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `ventas` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ventas_productos`
+-- Table structure for table `ventas_productos`
 --
 
 CREATE TABLE IF NOT EXISTS `ventas_productos` (
@@ -138,23 +138,23 @@ CREATE TABLE IF NOT EXISTS `ventas_productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`tipo_cantidades_id`) REFERENCES `productos_tipos_cantidades` (`tipo_cantidades_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `ventas`
+-- Constraints for table `ventas`
 --
 ALTER TABLE `ventas`
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuario_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `ventas_productos`
+-- Constraints for table `ventas_productos`
 --
 ALTER TABLE `ventas_productos`
   ADD CONSTRAINT `ventas_productos_ibfk_1` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`venta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
