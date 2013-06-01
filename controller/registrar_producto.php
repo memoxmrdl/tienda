@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once "mysql.php";
 require_once "utilities.php";
 
 $rq = @$_POST;

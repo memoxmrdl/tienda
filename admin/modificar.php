@@ -1,6 +1,5 @@
 <?php 
 require "../controller/utilities.php"; 
-require "../controller/mysql.php";
 require "../controller/status_session.php";
 ?>
 <!DOCTYPE html>

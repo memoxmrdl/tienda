@@ -115,7 +115,7 @@ if(!isset($_SESSION['cart']))
 * @param boolean $pictures Show pictures in cart? (default=false) 
 * @param boolean $editable Is cart editable? (default=true) 
 */ 
-function cart_show($cart, $edit = false) 
+function cart_show($cart, $edit = false, $total = false) 
 { 
  
   $ms = new mysql();
@@ -136,12 +136,12 @@ foreach($cart as $productID => $qty)
     echo "</tr>\n"; 
     } 
 
-    if($edit) {
+    if($total) {
       echo "<tr>
         <td></td>
         <td></td>
         <td><h4>TOTAL:</h4></td>
-        <td><h4>$".$this->cart_calculate_price($cart)."</h4></td>
+        <td><h3>$".$this->cart_calculate_price($cart)."</h3></td>
         <td></td>
       </tr>";
     }

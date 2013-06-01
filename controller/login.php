@@ -1,6 +1,5 @@
 <?php
 require_once "utilities.php";
-require_once "mysql.php";
 
 $usuario = $_POST["usuario"];
 $password = $_POST["password"];

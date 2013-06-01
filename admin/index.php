@@ -1,7 +1,7 @@
 <?php 
 require "../controller/utilities.php"; 
-require "../controller/mysql.php";
 include "../controller/status_session.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">

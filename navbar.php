@@ -18,9 +18,9 @@
       <? } ?>
     </p>
     <ul class="nav">
-      <li class="active"><a href="#">Inicio</a></li>
-      <li><a href="#">Servicios</a></li>
-      <li><a href="#">Contacto</a></li>
+      <li class="active"><a href="./index.php">Inicio</a></li>
+      <li><a href="./servicios.php">Servicios</a></li>
+      <li><a href="./contacto.php">Contacto</a></li>
     </ul>
   </div>
 </div>

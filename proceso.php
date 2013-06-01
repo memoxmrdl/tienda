@@ -23,8 +23,6 @@ require "controller/utilities.php";
 </head>
 
 <body>
-<?php require "navbar.php"; ?>
-
 <div class="container">
   <div class="span1">
   </div>
@@ -41,9 +39,9 @@ require "controller/utilities.php";
     <h3 style="float: right; color:red">No. <?php echo strtoupper(gen(5)); ?></h3>
     <h2 style='font-size: 1.3em;'>Nombre: <?php echo $_SESSION["nombre"]; ?></h2>
     <br>
-    <?php $cart->cart_show($_SESSION['cart'], true, true); ?>
-    <a href="proceso.php" class="btn btn-success" style="float: right">Procesar compra</a>
-    <a href="controller/cancelarcart.php" class="btn btn-danger" style="float: right; margin-right:5px">Cancelar Comprar</a>
+    <?php $cart->cart_show($_SESSION['cart'], false, true); ?>
+    <a href="#" onclick="window.print()" class="btn btn-success" style="float: right">Imprimir</a>
+    <a href="index.php" style="font-size: 1.5em">Regresar</a>
     <?php } else { ?>
      <h2>No tiene productos en su canasta</h2>
      <a href="index.php" style="font-size: 1.5em">Regresar</a>
